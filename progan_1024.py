@@ -6,6 +6,8 @@ import PIL.Image
 import sys
 sys.path.append("./progressive_growing_of_gans")
 
+tf.compat.v1.disable_eager_execution()
+
 # Initialize TensorFlow session.
 tf.compat.v1.InteractiveSession()
 
