@@ -3,6 +3,9 @@ import numpy as np
 import tensorflow as tf
 import PIL.Image
 
+import sys
+sys.path.append("./progressive_growing_of_gans")
+
 # Initialize TensorFlow session.
 tf.compat.v1.InteractiveSession()
 
