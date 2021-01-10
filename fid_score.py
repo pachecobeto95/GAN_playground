@@ -98,7 +98,7 @@ class ImagePathDataset(torch.utils.data.Dataset):
         return img
 
 
-def get_activations(files, model, batch_size=50, dims=2048, device='cpu', resize=False):
+def get_activations(files, model, batch_size=50, dims=2048, device='cpu', resize=False, img_size=128):
     """Calculates the activations of the pool_3 layer for all images.
 
     Params:
@@ -126,7 +126,7 @@ def get_activations(files, model, batch_size=50, dims=2048, device='cpu', resize
 
     #dataset = None
     if (resize):
-      img_size = 128
+      
       transformation = TF.Compose([TF.Resize((img_size, img_size)),
       TF.ToTensor()])
       dataset = ImagePathDataset(files, transforms=transformation)
@@ -224,7 +224,7 @@ def calculate_frechet_distance(mu1, sigma1, mu2, sigma2, eps=1e-6):
 
 
 def calculate_activation_statistics(files, model, batch_size=50, dims=2048,
-                                    device='cpu', resize=False):
+                                    device='cpu', resize=False, img_size=128):
     """Calculation of the statistics used by the FID.
     Params:
     -- files       : List of image files paths
@@ -241,14 +241,13 @@ def calculate_activation_statistics(files, model, batch_size=50, dims=2048,
     -- sigma : The covariance matrix of the activations of the pool_3 layer of
                the inception model.
     """
-    print(resize)
-    act = get_activations(files, model, batch_size, dims, device, resize)
+    act = get_activations(files, model, batch_size, dims, device, resize, img_size)
     mu = np.mean(act, axis=0)
     sigma = np.cov(act, rowvar=False)
     return mu, sigma
 
 
-def compute_statistics_of_path(path, model, batch_size, dims, device, resize):
+def compute_statistics_of_path(path, model, batch_size, dims, device, resize, img_size=128):
     if path.endswith('.npz'):
         with np.load(path) as f:
             m, s = f['mu'][:], f['sigma'][:]
@@ -257,7 +256,7 @@ def compute_statistics_of_path(path, model, batch_size, dims, device, resize):
         files = sorted([file for ext in IMAGE_EXTENSIONS
                        for file in path.glob('*.{}'.format(ext))])
         m, s = calculate_activation_statistics(files, model, batch_size,
-                                               dims, device, resize)
+                                               dims, device, resize, img_size)
 
     return m, s
 
