@@ -198,6 +198,8 @@ for epoch in range(opt.n_epochs):
         if batches_done % opt.sample_interval == 0:
             save_image(gen_imgs.data[:25], "./drive/MyDrive/DCGAN-MNIST/images/%d.png" % batches_done, nrow=5, normalize=True)
 
+    os.makedirs("./drive/MyDrive/DCGAN-MNIST/images_epoch_%d" % epoch, exist_ok=True)
+
     for j in range(len(gen_imgs)):
         save_image(gen_imgs.data[j], "./drive/MyDrive/DCGAN-MNIST/images_epoch_%d/%d.jpg" % (epoch, j), normalize=True)
 
