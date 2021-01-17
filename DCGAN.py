@@ -98,7 +98,6 @@ class Discriminator(nn.Module):
 
         return validity
 
-
 # Loss function
 adversarial_loss = torch.nn.BCELoss()
 
@@ -140,7 +139,22 @@ Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor
 #  Training
 # ----------
 
-for epoch in range(opt.n_epochs):
+modelPath = "./drive/MyDrive/DCGAN-MNIST/best_model_GAN_2.pth"
+
+initial_epoch = 0
+
+try:
+    generator.load_state_dict(torch.load(modelPath)['model_generator_state_dict'])
+    discriminator.load_state_dict(torch.load(modelPath)['model_discriminator_state_dict'])
+    optimizer_G.load_state_dict(torch.load(modelPath)['generator_optimizer_state_dict'])
+    optimizer_D.load_state_dict(torch.load(modelPath)['discriminator_optimizer_state_dict'])
+
+    initial_epoch = torch.load(modelPath)['epoch']
+    
+except Exception as e:
+    print(e)
+
+for epoch in range(initial_epoch, opt.n_epochs):
 
     gen_imgs = None
     total_loss_list = []
