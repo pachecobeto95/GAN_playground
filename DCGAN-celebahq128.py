@@ -8,7 +8,6 @@ from torchvision.utils import save_image
 import numpy as np
 import sys
 from torchsummary import summary
-!pip install gputil
 import GPUtil as GPU
 GPUs = GPU.getGPUs()
 import time
@@ -253,8 +252,6 @@ b2 = 0.999
 n_epochs = 100
 sample_interval = 400
 modelPath = "./drive/MyDrive/DCGAN-CelebAHQ-128/best_model_GAN_2.pth"
-!mkdir -p ./drive/MyDrive/DCGAN-CelebAHQ-128/images
-!mkdir -p ./drive/MyDrive/DCGAN-CelebAHQ-128/images_val
 
 # Initialize generator and discriminator
 generator = Generator(z_dim, img_size)
