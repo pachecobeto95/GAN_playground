@@ -249,7 +249,7 @@ ngpu = 1
 lr = 0.0002
 b1 = 0.5
 b2 = 0.999
-n_epochs = 1000
+n_epochs = 3000
 sample_interval = 400
 modelPath = "./drive/MyDrive/DCGAN-CelebAHQ-64/best_model_GAN_2.pth"
 
