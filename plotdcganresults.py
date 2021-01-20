@@ -15,8 +15,8 @@ with open("results.csv", 'r') as resultsFile:
     gLosses.append(row["GLoss"])
     totalLosses.append(row["TotalLoss"])
 
-plt.plot(epochs, dLosses, "royalblue")
-plt.plot(epochs, gLosses, "orange")
+plt.plot(epochs, dLosses, "royalblue", label="Discriminador")
+plt.plot(epochs, gLosses, "orange", label="Gerador")
 plt.title("DCGAN - MNIST: Custos do Gerador e do Discriminador")
 plt.xlabel("Época")
 plt.ylabel("Custo")
