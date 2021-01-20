@@ -11,10 +11,10 @@ with open("results.csv", 'r') as resultsFile:
   reader = csv.DictReader(resultsFile)
   
   for row in reader:
-    epochs.append(row["Epoch"])
-    dLosses.append(row["DLoss"])
-    gLosses.append(row["GLoss"])
-    totalLosses.append(row["TotalLoss"])
+    epochs.append(int(row["Epoch"]))
+    dLosses.append(float(row["DLoss"]))
+    gLosses.append(float(row["GLoss"]))
+    totalLosses.append(float(row["TotalLoss"]))
 
 plt.locator_params(nbins=5)
 plt.plot(epochs, dLosses, "royalblue", label="Discriminador")
