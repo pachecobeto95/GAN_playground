@@ -1,5 +1,6 @@
 import csv
 import matplotlib.pyplot as plt
+import numpy as np
 
 epochs = []
 dLosses = []
@@ -18,6 +19,8 @@ with open("results.csv", 'r') as resultsFile:
 plt.locator_params(nbins=5)
 plt.plot(epochs, dLosses, "royalblue", label="Discriminador")
 plt.plot(epochs, gLosses, "orange", label="Gerador")
+plt.xticks(np.arange(0, len(epochs), 100))
+plt.yticks(np.arange(0, max(dLosses[-1], gLosses[-1]), 2))
 plt.title("DCGAN - MNIST: Custos do Gerador e do Discriminador")
 plt.xlabel("Época")
 plt.ylabel("Custo")
@@ -27,6 +30,8 @@ plt.savefig("dcgan-separate-losses.pdf")
 plt.clf()
 
 plt.plot(epochs, totalLosses, "royalblue")
+plt.xticks(np.arange(0, len(epochs), 100))
+plt.yticks(np.arange(0, max(totalLosses), 2))
 plt.title("DCGAN - MNIST: Custo Total")
 plt.xlabel("Época")
 plt.ylabel("Custo")
