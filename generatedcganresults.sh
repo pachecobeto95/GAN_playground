@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Epoch, DLoss, GLoss, TotalLoss" > resultsdcgan.csv
+echo "Epoch, DLoss, GLoss, TotalLoss" > results.csv
 cat logdcgan.txt | grep "Batch 937/938" | awk '{print $2}' | awk -F/ '{print $1}' > epoch.txt
 cat logdcgan.txt | grep "Batch 937/938" | awk '{print $7}' | awk -F] '{print $1}' > dlosses.txt
 cat logdcgan.txt | grep "Batch 937/938" | awk '{print $10}' | awk -F] '{print $1}' > glosses.txt
